@@ -1,15 +1,68 @@
 {
-  "ok": true,
-  "mode": "MOCK",
-  "updated_at": null,
+  "ok": false,
+  "mode": "LIVE",
+  "updated_at": 1788094796.8107715,
   "portfolio": [],
   "market": [
-    {"symbol":"GOLD_1G","name":"KRX 금 1g","value":null,"unit":"₩","source":"WAITING"},
-    {"symbol":"USDKRW","name":"원/달러","value":null,"unit":"₩","source":"WAITING"},
-    {"symbol":"DXY","name":"달러지수","value":null,"unit":"","source":"WAITING"},
-    {"symbol":"SOX","name":"필라델피아반도체","value":null,"unit":"","source":"WAITING"},
-    {"symbol":"US2Y","name":"미국 2년물","value":null,"unit":"%","source":"WAITING"},
-    {"symbol":"KOSPI200_NIGHT","name":"KOSPI200 야간선물","value":null,"unit":"","source":"WAITING"}
+    {
+      "symbol": "GOLD_1G",
+      "name": "KRX 금 1g",
+      "value": null,
+      "change_pct": null,
+      "unit": "₩",
+      "source": "WAITING_KRX_SECRET",
+      "market_state": "WAITING"
+    },
+    {
+      "symbol": "USDKRW",
+      "name": "원/달러",
+      "value": 1371.5,
+      "change_pct": -0.6468998790232106,
+      "unit": "₩",
+      "source": "YAHOO_FINANCE",
+      "market_state": "LIVE_OR_LAST",
+      "provider_time": 1788060635
+    },
+    {
+      "symbol": "DXY",
+      "name": "달러지수",
+      "value": 99.677,
+      "change_pct": -0.025074722673557037,
+      "unit": "",
+      "source": "YAHOO_FINANCE",
+      "market_state": "LIVE_OR_LAST",
+      "provider_time": 1787950799
+    },
+    {
+      "symbol": "SOX",
+      "name": "필라델피아반도체",
+      "value": 11469.662,
+      "change_pct": -3.4716473061441877,
+      "unit": "",
+      "source": "YAHOO_FINANCE",
+      "market_state": "LIVE_OR_LAST",
+      "provider_time": 1787951759
+    },
+    {
+      "symbol": "US2Y",
+      "name": "미국 2년물",
+      "value": null,
+      "change_pct": null,
+      "unit": "%",
+      "source": "PROVIDER_NOT_CONFIGURED",
+      "market_state": "WAITING"
+    },
+    {
+      "symbol": "KOSPI200_NIGHT",
+      "name": "KOSPI200 야간선물",
+      "value": null,
+      "change_pct": null,
+      "unit": "",
+      "source": "PROVIDER_NOT_CONFIGURED",
+      "market_state": "WAITING"
+    }
   ],
-  "errors": []
+  "errors": [
+    "TOSS_HOLDINGS_URL secret not configured"
+  ]
 }
