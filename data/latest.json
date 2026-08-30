@@ -1,0 +1,15 @@
+{
+  "ok": true,
+  "mode": "MOCK",
+  "updated_at": null,
+  "portfolio": [],
+  "market": [
+    {"symbol":"GOLD_1G","name":"KRX 금 1g","value":null,"unit":"₩","source":"WAITING"},
+    {"symbol":"USDKRW","name":"원/달러","value":null,"unit":"₩","source":"WAITING"},
+    {"symbol":"DXY","name":"달러지수","value":null,"unit":"","source":"WAITING"},
+    {"symbol":"SOX","name":"필라델피아반도체","value":null,"unit":"","source":"WAITING"},
+    {"symbol":"US2Y","name":"미국 2년물","value":null,"unit":"%","source":"WAITING"},
+    {"symbol":"KOSPI200_NIGHT","name":"KOSPI200 야간선물","value":null,"unit":"","source":"WAITING"}
+  ],
+  "errors": []
+}
