@@ -1,0 +1,46 @@
+name: Update StockCardWeb data
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/5 * * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stockcardweb-data
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch latest data
+        env:
+          TOSS_CLIENT_ID: ${{ secrets.TOSS_CLIENT_ID }}
+          TOSS_CLIENT_SECRET: ${{ secrets.TOSS_CLIENT_SECRET }}
+          TOSS_ACCOUNT_SEQ: ${{ secrets.TOSS_ACCOUNT_SEQ }}
+          TOSS_BASE_URL: ${{ secrets.TOSS_BASE_URL }}
+          TOSS_HOLDINGS_URL: ${{ secrets.TOSS_HOLDINGS_URL }}
+          TOSS_ACCESS_TOKEN: ${{ secrets.TOSS_ACCESS_TOKEN }}
+          TOSS_CLIENT_ID_HEADER: ${{ secrets.TOSS_CLIENT_ID_HEADER }}
+          TOSS_CLIENT_SECRET_HEADER: ${{ secrets.TOSS_CLIENT_SECRET_HEADER }}
+          TOSS_ACCOUNT_SEQ_HEADER: ${{ secrets.TOSS_ACCOUNT_SEQ_HEADER }}
+          KRX_AUTH_KEY: ${{ secrets.KRX_AUTH_KEY }}
+        run: python scripts/fetch_data.py
+      - name: Commit latest.json when changed
+        run: |
+          git config user.name "stockcardweb-bot"
+          git config user.email "stockcardweb-bot@users.noreply.github.com"
+          git add data/latest.json
+          if git diff --cached --quiet; then
+            echo "No data change"
+          else
+            git commit -m "chore: update dashboard data"
+            git push
+          fi
