@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="theme-color" content="#0b0d10" />
+<title>StockCardWeb</title>
+<style>
+:root{color-scheme:dark;--bg:#0b0d10;--panel:#15191f;--line:#2a3038;--text:#f4f7fb;--muted:#8f9aaa;--up:#ff6262;--down:#5f9eff;--good:#37c985;--warn:#ffb84d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,"Malgun Gothic",sans-serif}
+header{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;background:rgba(11,13,16,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+h1{font-size:20px;margin:0}.status{font-size:12px;color:var(--muted);text-align:right}.live{color:var(--good)}.mock{color:var(--warn)}
+main{padding:16px;max-width:1600px;margin:auto}.section-title{font-size:13px;color:var(--muted);margin:6px 2px 10px;text-transform:uppercase;letter-spacing:.08em}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:22px}
+.card{background:linear-gradient(180deg,#181d24,#12161b);border:1px solid var(--line);border-radius:14px;padding:15px;min-height:165px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.symbol{font-size:12px;color:var(--muted)}.name{font-size:16px;font-weight:750;margin-top:3px}.price{font-size:28px;font-weight:850;margin:12px 0 3px;letter-spacing:-.02em}
+.ret{font-size:14px;font-weight:750}.up{color:var(--up)}.down{color:var(--down)}.neutral{color:var(--muted)}
+.row{display:flex;justify-content:space-between;gap:10px;margin-top:8px;font-size:12px;color:#c3cad4}.row span:first-child{color:var(--muted)}
+.empty{grid-column:1/-1;border:1px dashed var(--line);border-radius:14px;padding:28px;text-align:center;color:var(--muted)}
+footer{padding:8px 16px 24px;color:#687382;font-size:11px;max-width:1600px;margin:auto}
+@media(max-width:560px){header{padding:12px}main{padding:10px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.card{padding:12px;min-height:155px}.price{font-size:21px}}
+</style>
+</head>
+<body>
+<header><h1>StockCardWeb</h1><div id="status" class="status">데이터 확인 중...</div></header>
+<main>
+  <div class="section-title">보유종목</div><div id="portfolio" class="grid"></div>
+  <div class="section-title">시장지표</div><div id="market" class="grid"></div>
+</main>
+<footer>API 인증정보는 브라우저에 저장하지 않습니다. GitHub Actions가 서버 측에서 데이터를 수집하고 이 페이지는 생성된 JSON만 읽습니다.</footer>
+<script>
+const $=s=>document.querySelector(s);
+function cls(v){return v==null?'neutral':Number(v)>=0?'up':'down'}
+function fmt(v,d=2){if(v==null||Number.isNaN(Number(v)))return '—';return Number(v).toLocaleString('ko-KR',{maximumFractionDigits:d})}
+function money(v,currency,market){if(v==null)return '—';const kr=currency==='KRW'||currency==='₩'||market==='KR';return (kr?'₩':'$')+fmt(v,kr?0:4)}
+function age(ts){if(!ts)return '갱신 대기';const s=Math.max(0,Math.floor(Date.now()/1000-ts));if(s<60)return s+'초 전';if(s<3600)return Math.floor(s/60)+'분 전';return Math.floor(s/3600)+'시간 전'}
+function portfolioCard(c){const ret=c.return_pct;return `<article class="card"><div class="symbol">${c.symbol??''}</div><div class="name">${c.name||c.symbol||''}</div><div class="price">${money(c.price,c.currency,c.market)}</div><div class="ret ${cls(ret)}">${ret==null?'수익률 —':(ret>=0?'+':'')+fmt(ret,2)+'%'}</div><div class="row"><span>평균매수가</span><b>${money(c.avg_price,c.currency,c.market)}</b></div><div class="row"><span>보유수량</span><b>${fmt(c.quantity,4)}</b></div><div class="row"><span>평가손익</span><b class="${cls(c.pnl)}">${c.pnl==null?'—':money(c.pnl,c.currency,c.market)}</b></div><div class="row"><span>소스</span><b>${c.source||'—'}</b></div></article>`}
+function marketCard(c){const unit=c.unit||'';let value='—';if(c.value!=null){if(unit==='₩')value='₩'+fmt(c.value,2);else if(unit==='%')value=fmt(c.value,3)+'%';else value=fmt(c.value,4)}return `<article class="card"><div class="symbol">${c.symbol??''}</div><div class="name">${c.name||c.symbol||''}</div><div class="price">${value}</div><div class="ret ${cls(c.change_pct)}">${c.change_pct==null?'등락률 —':(c.change_pct>=0?'+':'')+fmt(c.change_pct,2)+'%'}</div><div class="row"><span>상태</span><b>${c.market_state||'—'}</b></div><div class="row"><span>소스</span><b>${c.source||'—'}</b></div></article>`}
+async function load(){try{const r=await fetch('./data/latest.json?t='+Date.now(),{cache:'no-store'});const d=await r.json();$('#status').innerHTML=`<span class="${d.mode==='LIVE'?'live':'mock'}">● ${d.mode||'UNKNOWN'}</span><br>${age(d.updated_at)}`;const p=d.portfolio||[];$('#portfolio').innerHTML=p.length?p.map(portfolioCard).join(''):'<div class="empty">보유종목 데이터가 아직 없습니다. GitHub Secrets와 Toss API 연결을 확인하세요.</div>';const m=d.market||[];$('#market').innerHTML=m.length?m.map(marketCard).join(''):'<div class="empty">시장지표 데이터가 없습니다.</div>'}catch(e){$('#status').textContent='데이터 읽기 실패';}}
+load();setInterval(load,15000);
+</script>
+</body>
+</html>
