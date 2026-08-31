@@ -1,7 +1,7 @@
 {
   "ok": false,
   "mode": "LIVE",
-  "updated_at": 1788156672.2645378,
+  "updated_at": 1788184235.5297055,
   "portfolio": [],
   "market": [
     {
@@ -16,32 +16,32 @@
     {
       "symbol": "USDKRW",
       "name": "원/달러",
-      "value": 1371.73,
-      "change_pct": -0.2864058967630312,
+      "value": 1368.54,
+      "change_pct": -0.5182929045483342,
       "unit": "₩",
       "source": "YAHOO_FINANCE",
       "market_state": "LIVE_OR_LAST",
-      "provider_time": 1788156668
+      "provider_time": 1788184225
     },
     {
       "symbol": "DXY",
       "name": "달러지수",
-      "value": 99.608,
-      "change_pct": -0.09428095725260155,
+      "value": 99.529,
+      "change_pct": -0.17351708090108664,
       "unit": "",
       "source": "YAHOO_FINANCE",
       "market_state": "LIVE_OR_LAST",
-      "provider_time": 1788156070
+      "provider_time": 1788183634
     },
     {
       "symbol": "SOX",
       "name": "필라델피아반도체",
-      "value": 11469.662,
-      "change_pct": -3.4718991432563073,
+      "value": 11526.61,
+      "change_pct": 0.4965098361224607,
       "unit": "",
       "source": "YAHOO_FINANCE",
       "market_state": "LIVE_OR_LAST",
-      "provider_time": 1787951759
+      "provider_time": 1788184233
     },
     {
       "symbol": "US2Y",
