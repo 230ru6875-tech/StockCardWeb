@@ -1,7 +1,7 @@
 {
   "ok": false,
   "mode": "LIVE",
-  "updated_at": 1788620699.0275064,
+  "updated_at": 1788628639.81062,
   "portfolio": [],
   "market": [
     {
@@ -21,7 +21,7 @@
       "unit": "₩",
       "source": "YAHOO_FINANCE",
       "market_state": "LIVE_OR_LAST",
-      "provider_time": 1788579051
+      "provider_time": 1788579052
     },
     {
       "symbol": "DXY",
