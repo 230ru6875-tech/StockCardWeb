@@ -1,7 +1,7 @@
 {
   "ok": false,
   "mode": "LIVE",
-  "updated_at": 1788726375.4304645,
+  "updated_at": 1788732816.1714394,
   "portfolio": [],
   "market": [
     {
@@ -16,22 +16,22 @@
     {
       "symbol": "USDKRW",
       "name": "원/달러",
-      "value": 1345.99,
-      "change_pct": -0.7257547037607948,
+      "value": 1345.12,
+      "change_pct": -0.7899220403737917,
       "unit": "₩",
       "source": "YAHOO_FINANCE",
       "market_state": "LIVE_OR_LAST",
-      "provider_time": 1788722656
+      "provider_time": 1788732144
     },
     {
       "symbol": "DXY",
       "name": "달러지수",
-      "value": 99.157,
-      "change_pct": -0.019157860772778257,
+      "value": 99.173,
+      "change_pct": -0.0030249253851755142,
       "unit": "",
       "source": "YAHOO_FINANCE",
       "market_state": "LIVE_OR_LAST",
-      "provider_time": 1788555599
+      "provider_time": 1788732211
     },
     {
       "symbol": "SOX",
