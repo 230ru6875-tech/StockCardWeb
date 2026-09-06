@@ -1,7 +1,7 @@
 {
   "ok": false,
   "mode": "LIVE",
-  "updated_at": 1788710369.2976694,
+  "updated_at": 1788718376.4581258,
   "portfolio": [],
   "market": [
     {
@@ -16,12 +16,12 @@
     {
       "symbol": "USDKRW",
       "name": "원/달러",
-      "value": 1351.1,
-      "change_pct": -0.3488637956086005,
+      "value": 1345.99,
+      "change_pct": -0.7257547037607948,
       "unit": "₩",
       "source": "YAHOO_FINANCE",
       "market_state": "LIVE_OR_LAST",
-      "provider_time": 1788665433
+      "provider_time": 1788713581
     },
     {
       "symbol": "DXY",
