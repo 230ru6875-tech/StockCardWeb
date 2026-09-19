@@ -1,7 +1,7 @@
 {
   "ok": false,
   "mode": "LIVE",
-  "updated_at": 1789774801.1211543,
+  "updated_at": 1789781823.0253732,
   "portfolio": [],
   "market": [
     {
@@ -27,7 +27,7 @@
       "symbol": "DXY",
       "name": "달러지수",
       "value": 100.215,
-      "change_pct": -0.03291836246109847,
+      "change_pct": -0.006984494422368481,
       "unit": "",
       "source": "YAHOO_FINANCE",
       "market_state": "LIVE_OR_LAST",
